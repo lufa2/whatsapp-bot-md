@@ -5,6 +5,7 @@ const path = require('path')
 const configPath = path.join(__dirname, './config.env')
 const databasePath = path.join(__dirname, './database.db')
 if (existsSync(configPath)) require('dotenv').config({ path: configPath })
+const isRailway = toBool(process.env.RAILWAY)
 const DATABASE_URL =
   process.env.DATABASE_URL === undefined ? databasePath : process.env.DATABASE_URL
 module.exports = {
@@ -78,4 +79,10 @@ module.exports = {
   BING_COOKIE: (process.env.BING_COOKIE || '').trim(),
   GEMINI_API_KEY: (process.env.GEMINI_API_KEY || '').trim(),
   ADMINS: process.env.GROUP_ADMINS || '',
+}
+
+
+if (isRailway) {
+  console.log("Running on Railway.app");
+  // Add any Railway-specific configuration here
 }
